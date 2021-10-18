@@ -14,6 +14,11 @@ This API allows client to connect with the server via socket instead of only sen
 3. Server maintains a mapping of the actively connected the user and socket Id on which the user is connected.
 4. While the user is connected, if there is any other active user sending a message to this user, server uses the user-socket mapping to send the message to the user.
 
+## Message filtering
+
+As defined in [Swagger spec](./api.swagger.yml), we can use the `/messages` endpoint to list the messages based on query parameters. As per the requirement, we should be able to get the last 100 messages or all messages in last 30 days, with the capability to add sender/receiver filter as well. The endpoint has the provision to accept messages limit and timeframe as input parameters so it's more flexible if we want to fetch more messages or a different timeframe in later stages.
+
+
 ## Steps to test the POC offline
 
 1. Initially we have to start the server using `node server.js` command.
