@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
         } else {
             //TODO - persist the message as unread against the userId
         }
-        //TODO - persists the message to Db => senderId | receiverId | message
+        //TODO - persists the message to Db => senderId | receiverId | message | timestamp
     });
     socket.on("disconnect", (data => {
         //when user disconnects, remove the socketId from mapping
@@ -33,7 +33,10 @@ io.on("connection", (socket) => {
 
 
 app.get('/messages', (req, res) => {
-
+    /* 
+    use the query parameters to fetch the data from Db with the schema
+    senderId | receiverId | message | timestamp
+    */
     res.send("success")
 });
 
