@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  description: "This API is used to perform operations on the chat exchanges occured between users"
+  version: "1.0.0"
+  title: "Chat API"
+host: "localhost"
+basePath: "/v1"
+tags:
+- name: "pet"
+  description: "API Methods related to chat message"
+schemes:
+- "https"
+- "http"
+paths:
+  /messages:
+    get:
+      tags:
+      - "message"
+      summary: "fetch messages"
+      operationId: "listMessages"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "senderId"
+        in: "query"
+        description: "UserID of the message sender"
+        required: false
+        type: "string"
+      - name: "receiverId"
+        in: "query"
+        description: "UserID of the message receiver"
+        required: false
+        type: "string"
+      - name: "limit"
+        in: "query"
+        description: "limit on the number of messages that should be returned"
+        required: false
+        type: "integer"
+        default: 100
+      - name: "offset"
+        in: "query"
+        description: "offset from which the messages should be returned"
+        required: false
+        type: "integer"
+        default: 0
+      - name: "from"
+        in: "query"
+        description: "date from which the messages should be returned"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "to"
+        in: "query"
+        description: "date until which the messages should be returned"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "sort"
+        in: "query"
+        type: "string"
+        description: "preference of message ordering"
+        enum:
+        - "ASC"
+        - "DESC"
+      responses:
+        "200":
+          $ref: "#/definitions/Messages"
+        "400":
+          description: "Invalid username/password supplied"
+definitions:
+  Messages:
+    type: "object"
+    properties:
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Message"
+  Message:
+    type: "object"
+    properties:
+      senderId:
+        type: "string"
+      receiverId:
+        type: "string"
+      message:
+        type: "string"
+      timestamp:
+        type: "string"
+        format: "date-time"
